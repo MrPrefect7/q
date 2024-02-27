@@ -8,7 +8,7 @@ body{
 }
 .content{
   width: 100vw;
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   margin-top: 20px;
   justify-content: center;
