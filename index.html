@@ -7,110 +7,83 @@
   <title>Document</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
-    .cv {
+ #cv {
+  width: 8.5in;
+  /* A4 paper size */
+  height: 11in;
+  margin: 0.5in;
+  padding: 0.5in;
   font-family: Arial, sans-serif;
-  margin: 20px auto;
-  width: 80%;
-  padding: 20px;
-  border: 1px solid #ddd;
 }
 
-.photo {
-  width: 100px;
-  height: 100px;
-  float: left;
-  margin-right: 20px;
+#cv h1 {
+  font-size: 24px;
+  font-weight: bold;
 }
 
-h2 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-p {
-  margin-bottom: 10px;
-}
-
-hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-ul li {
-  margin-bottom: 10px;
-}
-
-.submit {
-  margin-top: 20px;
-  padding: 10px 20px;
+#cv p {
   font-size: 16px;
-  border: 1px solid #ddd;
-  background-color: #f0f0f0;
-  cursor: pointer;
+  line-height: 1.5;
 }
 
+#download-button {
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
   </style>
-  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
   
-<div class="cv">
-  <img src="your_image.jpg" alt="Your Photo" class="photo">
-  <h2>Your Name</h2>
-  <p>Your Address</p>
-  <p>Your Phone Number</p>
-  <p>Your Email Address</p>
-  <hr>
-  <h3>Education</h3>
-  <ul>
-    <li>2018-2022: Bachelor of Science in Computer Science, University of Dhaka</li>
-    <li>2016-2018: Higher Secondary Certificate, Dhaka College</li>
-  </ul>
-  <h3>Skills</h3>
-  <ul>
-    <li>Programming Languages: C++, Java, Python</li>
-    <li>Web Development: HTML, CSS, JavaScript</li>
-    <li>Database Management: MySQL, PostgreSQL</li>
-  </ul>
-  <h3>Experience</h3>
-  <ul>
-    <li>Software Engineer Intern, Google (Summer 2023)</li>
-    <li>Web Developer, XYZ Company (2022-Present)</li>
-  </ul>
-  <h3>Projects</h3>
-  <ul>
-    <li>Developed a web application for online food ordering</li>
-    <li>Built a machine learning model to predict customer churn</li>
-  </ul>
-</div>
+<div id="cv">
+  <h1>**[আপনার নাম]**</h1>
+  <p>[আপনার ঠিকানা]</p>
+  <p>[আপনার ফোন নম্বর]</p>
+  <p>[আপনার ইমেইল]</p>
 
-<button type="submit" class="submit">Download CV</button>
+  <button type="button" id="download-button">ডাউনলোড</button>
+</div>
 
   
   <script>
   
-const cv = document.querySelector('.cv');
-const submitBtn = document.querySelector('.submit');
+const downloadButton = document.getElementById("download-button");
 
-submitBtn.addEventListener('click', () => {
-  // Generate PDF
-  const pdf = new jsPDF('p', 'pt', 'a4');
-  pdf.html(cv, {
-    margin: [20, 20, 20, 20],
-    filename: 'your_cv.pdf',
-  });
+downloadButton.addEventListener("click", () => {
+  // HTML to PDF conversion library
+  const htmlToPdf = require("html-pdf");
+
+  const options = {
+    // Page size
+    format: "A4",
+    // Margins
+    margin: {
+      top: "0.5in",
+      right: "0.5in",
+      bottom: "0.5in",
+      left: "0.5in",
+    },
+  };
+
+  // Convert HTML to PDF
+  htmlToPdf
+    .convert(document.getElementById("cv").outerHTML, options)
+    .then((pdfBuffer) => {
+      // Save the PDF file
+      const fileName = "cv.pdf";
+      const file = new File([pdfBuffer], fileName, { type: "application/pdf" });
+
+      // Trigger the download
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(file);
+      downloadLink.download = fileName;
+      downloadLink.click();
+    });
 });
+
 
 
   </script>
