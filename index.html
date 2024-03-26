@@ -2,31 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Quick Play</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
   
-  <!-- HTML -->
-  
+  <style>
+    .cv {
+  font-family: Arial, sans-serif;
+  margin: 20px auto;
+  width: 80%;
+  padding: 20px;
+  border: 1px solid #ddd;
+}
 
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="style.css">
+.photo {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin-right: 20px;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+.submit {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+  </style>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
-
 <body>
-
-<div class="content">
   
-  <a href="pages/24V1.htm">24V1</a>
-  <a href="pages/24V2.htm">24V2</a>
-  <a href="pages/24V3.htm">24V3</a>
-  <a href="pages/24V4.htm">24V4</a>  
-  <a href="pages/24V5.htm">24V5</a>  
-  
+<div class="cv">
+  <img src="your_image.jpg" alt="Your Photo" class="photo">
+  <h2>Your Name</h2>
+  <p>Your Address</p>
+  <p>Your Phone Number</p>
+  <p>Your Email Address</p>
+  <hr>
+  <h3>Education</h3>
+  <ul>
+    <li>2018-2022: Bachelor of Science in Computer Science, University of Dhaka</li>
+    <li>2016-2018: Higher Secondary Certificate, Dhaka College</li>
+  </ul>
+  <h3>Skills</h3>
+  <ul>
+    <li>Programming Languages: C++, Java, Python</li>
+    <li>Web Development: HTML, CSS, JavaScript</li>
+    <li>Database Management: MySQL, PostgreSQL</li>
+  </ul>
+  <h3>Experience</h3>
+  <ul>
+    <li>Software Engineer Intern, Google (Summer 2023)</li>
+    <li>Web Developer, XYZ Company (2022-Present)</li>
+  </ul>
+  <h3>Projects</h3>
+  <ul>
+    <li>Developed a web application for online food ordering</li>
+    <li>Built a machine learning model to predict customer churn</li>
+  </ul>
 </div>
 
+<button type="submit" class="submit">Download CV</button>
+
+  
+  <script>
+  
+const cv = document.querySelector('.cv');
+const submitBtn = document.querySelector('.submit');
+
+submitBtn.addEventListener('click', () => {
+  // Generate PDF
+  const pdf = new jsPDF('p', 'pt', 'a4');
+  pdf.html(cv, {
+    margin: [20, 20, 20, 20],
+    filename: 'your_cv.pdf',
+  });
+});
 
 
+  </script>
 </body>
 </html>
