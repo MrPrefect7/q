@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Page</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html{
+      font-size: 62%;
+    }
+    body{
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    body button{
+      width: 70vw;
+      height: 5vh;
+      background: greenyellow;
+      border: none;
+      border-radius: 50px;
+      font-family: sans-serif;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    body div p{
+      color: red;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+
+  <button type="submit" id="submit">I am Not A Robot</button>
+<div>
+
+  <p id="pv">https://short.ink/GoloRYzhMKn</p>
+  <p id="p1">https://google.com</p>
+  <p id="p2">https://youtube.com</p>
+  <p id="p3">https://facebook.com</p>
+  <p>Current Time: <span id="currentTime"></span></p>
+
+
+</div>
+
+<script>
+  function updateCurrentTime() {
+  const currentTimeElement = document.getElementById('currentTime');
+  const now = new Date();
+  currentTimeElement.textContent = now.toLocaleTimeString(); // Updates the time every second
+
+  // Update time every second
+  setTimeout(updateCurrentTime, 1000);
+}
+
+updateCurrentTime(); // Initial call to start the clock
+
+// When the submit button is clicked
+document.getElementById("submit").addEventListener("click", function() {
+  // Save the current time to localStorage
+  const now = new Date();
+  const timeToSave = now.toLocaleTimeString(); // Current time
+  localStorage.setItem("savedTime", timeToSave);
+
+  // Save the values from p tags to localStorage
+  localStorage.setItem("pv", document.getElementById("pv").textContent);
+  localStorage.setItem("p1", document.getElementById("p1").textContent);
+  localStorage.setItem("p2", document.getElementById("p2").textContent);
+  localStorage.setItem("p3", document.getElementById("p3").textContent);
+
+  // Redirect to index.html
+  window.location.href = "index.html";
+});
+</script>
+</body>
+</html>
