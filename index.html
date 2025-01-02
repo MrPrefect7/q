@@ -3,89 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
- #cv {
-  width: 8.5in;
-  /* A4 paper size */
-  height: 11in;
-  margin: 0.5in;
-  padding: 0.5in;
-  font-family: Arial, sans-serif;
-}
-
-#cv h1 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-#cv p {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-#download-button {
-  margin-top: 1em;
-  padding: 0.5em 1em;
-  font-size: 16px;
-  font-weight: bold;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <title>Quick Play Viral Videos</title>
 </head>
 <body>
+  <header id="logo">
+    <a href="#" rel="noreferrer">Quick Play</a>
+  </header>
   
-<div id="cv">
-  <h1>**[আপনার নাম]**</h1>
-  <p>[আপনার ঠিকানা]</p>
-  <p>[আপনার ফোন নম্বর]</p>
-  <p>[আপনার ইমেইল]</p>
+  <div class="Data">
+      <p>Saved Time from Local Storage: <span id="savedTime"></span></p>
+  <p>Actual Time: <span id="actualTime"></span></p>
+  </div>
+  <div id="btnds">
+<a href="#" id="destroy">Clear Data</a>
+  </div>
+  <div id="body">
+    <div id="title">
+      <p>Video Title</p>
+    </div>
+    <div id="videoplayer">
+      <iframe 
+        id="iframe"
+        src="https://short.ink/YpcDZCqct" 
+        frameborder="0" 
+        scrolling="no" 
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div id="downloadbuttons">
+      <p>Download Full Video</p>
+      <span id="downloadbt">
+        <a href="" rel="noreferrer" id="btn1">1080p / 100 MB</a>
+        <a href="" rel="noreferrer" id="btn2">720p / 57 MB </a>
+        <a href="" rel="noreferrer" id="btn3">480p / 21 MB</a>
+      </span>
+    </div>
+  </div>
+  <footer>
+    <p>Powered By <a href="#">Quick Pay</a> & <a href="#">Tech Point</a></p>
+  </footer>
 
-  <button type="button" id="download-button">ডাউনলোড</button>
-</div>
+<script>
+      // Function to update the current time every second
+    function updateActualTime() {
+      const actualTimeElement = document.getElementById('actualTime');
+      const now = new Date();
+      actualTimeElement.textContent = now.toLocaleTimeString(); // Updates the time every second
 
-  
-  <script>
-  
-const downloadButton = document.getElementById("download-button");
+      setTimeout(updateActualTime, 1000);
+    }
 
-downloadButton.addEventListener("click", () => {
-  // HTML to PDF conversion library
-  const htmlToPdf = require("html-pdf");
+    updateActualTime(); // Initial call to start the clock
 
-  const options = {
-    // Page size
-    format: "A4",
-    // Margins
-    margin: {
-      top: "0.5in",
-      right: "0.5in",
-      bottom: "0.5in",
-      left: "0.5in",
-    },
-  };
+    function checkSavedTime() {
+      const savedTime = localStorage.getItem("savedTime");
+      if (savedTime) {
+        const savedTimeElement = document.getElementById("savedTime");
+        savedTimeElement.textContent = savedTime;
 
-  // Convert HTML to PDF
-  htmlToPdf
-    .convert(document.getElementById("cv").outerHTML, options)
-    .then((pdfBuffer) => {
-      // Save the PDF file
-      const fileName = "cv.pdf";
-      const file = new File([pdfBuffer], fileName, { type: "application/pdf" });
+        // Compare saved time with actual time
+        const savedTimeDate = new Date();
+        const currentTimeDate = new Date();
 
-      // Trigger the download
-      const downloadLink = document.createElement("a");
-      downloadLink.href = URL.createObjectURL(file);
-      downloadLink.download = fileName;
-      downloadLink.click();
+        // Assuming saved time in 'HH:MM:SS' format
+        const [savedHours, savedMinutes, savedSeconds] = savedTime.split(':').map(Number);
+        savedTimeDate.setHours(savedHours, savedMinutes, savedSeconds);
+
+        // Calculate the difference in minutes (1 minute instead of 60)
+        const timeDifference = (currentTimeDate - savedTimeDate) / (1000 * 60); // Difference in minutes
+
+        // If more than 60 minute, clear localStorage
+        if (timeDifference >= 1) {
+          localStorage.removeItem("savedTime");
+          localStorage.removeItem("pv");
+          localStorage.removeItem("p1");
+          localStorage.removeItem("p2");
+          localStorage.removeItem("p3");
+          alert("Link Expire, To Restore Again Visit Quick Play Telegram Channel");
+          window.location.reload(); // Reload the page to reflect the changes
+        } else {
+          // Update the iframe and buttons with the saved values
+          document.querySelector("iframe").src = localStorage.getItem("pv");
+          document.getElementById("btn1").href = localStorage.getItem("p1");
+          document.getElementById("btn2").href = localStorage.getItem("p2");
+          document.getElementById("btn3").href = localStorage.getItem("p3");
+        }
+      }
+    }
+
+    checkSavedTime(); // Call function to check saved time
+
+    // Event listener for the destroy button to clear the data manually
+    document.getElementById("destroy").addEventListener("click", function() {
+      localStorage.removeItem("savedTime");
+      localStorage.removeItem("pv");
+      localStorage.removeItem("p1");
+      localStorage.removeItem("p2");
+      localStorage.removeItem("p3");
+      alert("! You Remove Your Data !");
+      window.location.reload(); // Reload the page to reflect the changes
     });
-});
-
-
-
-  </script>
+</script>
 </body>
 </html>
