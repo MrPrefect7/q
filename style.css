@@ -71,17 +71,45 @@ body{
 }
 #videoplayer{
   width: 100vw;
-  height: auto;
+  height: 35vh;
+  display: flex;
+  justify-content: center;
+}
+.if-border{
+  width: 95vw;
+  height: 33vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 10px solid whitesmoke;
+  flex-direction: column;
 }
-#videoplayer iframe{
-  height: 360px;
-  width: 100%;
+.if-border iframe{
+  width: 90vw;
+  height: 25vh;
+  text-overflow: hidden;
+  overflow: hidden;
+  position: relative;
+  border-radius: 2px;
 }
-
+.if-border span{
+  width: 90vw;
+  height: 5vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 4%;
+}
+.if-border span a{
+  width: 30vw;
+  height: 5vh;
+  background: #D552FF;
+  border-radius: 5px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
 #downloadbuttons{
   width: 100vw;
   height: auto;
