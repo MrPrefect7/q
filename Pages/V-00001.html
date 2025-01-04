@@ -33,7 +33,7 @@
     }
     body div p{
       color: red;
-      opacity: 0;
+      /*opacity: 0;*/
     }
   </style>
 </head>
@@ -52,7 +52,7 @@
   <p id="p3">https://devuploads.com/hhdjmavpkoej</p>
   <p>Current Time: <span id="currentTime"></span></p>
 
-
+    <p id="referrer"></p>
 </div>
 
 <script>
@@ -84,6 +84,19 @@ document.getElementById("submit").addEventListener("click", function() {
   // Redirect to index.html
   window.location.href = "../";
 });
+
+  const referrer = document.referrer;
+
+// Select the paragraph tag
+const referrerElement = document.getElementById('referrer');
+
+// Display the referrer URL or a fallback message
+if (referrer) {
+  referrerElement.textContent = `Referrer URL: ${referrer}`;
+} else {
+  referrerElement.textContent = "No referrer URL available.";
+}
+  
 </script>
 </body>
 </html>
