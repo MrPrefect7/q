@@ -21,7 +21,18 @@
       align-items: center;
       flex-direction: column;
     }
-    body button{
+    body #submit{
+      width: 70vw;
+      height: 5vh;
+      background: greenyellow;
+      border: none;
+      border-radius: 50px;
+      font-family: sans-serif;
+      font-size: 3rem;
+      font-weight: bold;
+      display: none;
+    }
+    #continue{
       width: 70vw;
       height: 5vh;
       background: greenyellow;
@@ -31,16 +42,18 @@
       font-size: 3rem;
       font-weight: bold;
     }
+
     body div p{
       color: red;
-      /*opacity: 0;*/
+    
     }
   </style>
 </head>
 <body>
 
+ <button type="submit" id="continue">Continue</button>
 
-  <button type="submit" id="submit">I am Not A Robot</button>
+  <button type="submit" style="display: none;" id="submit">I am Not A Robot</button>
 <div>
 
   <p id="SV1-link">https://streamtape.com/e/lajMQOo66Zu7gBm/</p>
@@ -53,6 +66,14 @@
   <p>Current Time: <span id="currentTime"></span></p>
 
     <p id="referrer"></p>
+    
+    <p>Current date: <span id="currentDate"></span></p>
+    
+    <p id="save-date"></p>
+    
+    <p id="save-url"></p>
+    
+    <p id="oldurl">https://lksfy.com/</p>
 </div>
 
 <script>
@@ -85,7 +106,9 @@ document.getElementById("submit").addEventListener("click", function() {
   window.location.href = "../";
 });
 
-  const referrer = document.referrer;
+
+// Get the referrer URL
+const referrer = document.referrer;
 
 // Select the paragraph tag
 const referrerElement = document.getElementById('referrer');
@@ -94,9 +117,83 @@ const referrerElement = document.getElementById('referrer');
 if (referrer) {
   referrerElement.textContent = `Referrer URL: ${referrer}`;
 } else {
-  referrerElement.textContent = "No referrer URL available.";
+  referrerElement.textContent = "";
 }
-  
+
+      // Wait until the DOM is fully loaded
+      document.addEventListener('DOMContentLoaded', () => {
+        // Get the current date
+        const currentDate = new Date();
+
+        // Format the date as 'MM/DD/YYYY'
+        const formattedDate = currentDate.toLocaleDateString();
+
+        // Display the date in the <span> with ID 'currentDate'
+        document.getElementById('currentDate').textContent = formattedDate;
+      });
+      
+      
+      
+      
+      
+document.addEventListener("DOMContentLoaded", function () {
+  const continueButton = document.getElementById("continue");
+  const submitButton = document.getElementById("submit");
+  const referrerText = document.getElementById("referrer").textContent.trim();
+  const oldUrlText = document.getElementById("oldurl")?.textContent?.trim() || "";
+  const saveUrl = document.getElementById("save-url");
+  const currentDate = document.getElementById("currentDate").textContent.trim();
+  const saveDate = document.getElementById("save-date");
+
+  // Function to handle "continue" button click
+  continueButton.addEventListener("click", function () {
+    if (!referrerText || referrerText !== oldUrlText) {
+      alert("Referrer URL is empty or does not match the old URL.");
+      window.location.href = "some-other-page.html"; // Redirect to another page
+    } else {
+      // Replace content
+      saveUrl.textContent = referrerText;
+      saveDate.textContent = currentDate;
+
+      // Save to localStorage
+      localStorage.setItem("save-url", referrerText);
+      localStorage.setItem("save-date", currentDate);
+
+      // Hide "continue" button and show "Get Link" button
+      continueButton.style.display = "none";
+      submitButton.style.display = "";
+    }
+  });
+
+  // Automatic check
+  function autoCheck() {
+    const savedDate = localStorage.getItem("save-date") || "";
+    const savedUrl = localStorage.getItem("save-url") || "";
+
+    if (
+      !savedDate ||
+      savedDate !== currentDate ||
+      savedUrl !== oldUrlText
+    ) {
+      // Remove saved data from localStorage
+      localStorage.removeItem("save-date");
+      localStorage.removeItem("save-url");
+
+      // Update button visibility
+      continueButton.style.display = "";
+      submitButton.style.display = "none";
+    } else {
+      // Update button visibility
+      continueButton.style.display = "none";
+      submitButton.style.display = "";
+    }
+  }
+
+  // Run the auto-check
+  autoCheck();
+});
+
+
 </script>
 </body>
 </html>
