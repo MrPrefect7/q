@@ -30,7 +30,7 @@
       font-family: sans-serif;
       font-size: 3rem;
       font-weight: bold;
-      display: none;
+      display: ;
     }
     #continue{
       width: 70vw;
@@ -45,35 +45,44 @@
 
     body div p{
       color: red;
-    
+    opacity: 0;
     }
   </style>
 </head>
 <body>
 
  <button type="submit" id="continue">Continue</button>
+ 
+<!--- <button type="submit" id="Getlink">GetLink</button> -->
 
-  <button type="submit" style="display: none;" id="submit">I am Not A Robot</button>
+  <button type="submit" id="submit">I am Not A Robot</button>
+  
+<!--  <button id="removeData">Remove Saved Data</button> -->
+  
 <div>
 
   <p id="SV1-link">https://streamtape.com/e/lajMQOo66Zu7gBm/</p>
+  
   <p id="SV2-link">https://short.ink/d6QYLUUae</p>
+  
   <p id="pv">https://streamtape.com/e/lajMQOo66Zu7gBm/</p>
   
   <p id="p1">https://devuploads.com/hhdjmavpkoej</p>
   <p id="p2">https://devuploads.com/hhdjmavpkoej</p>
   <p id="p3">https://devuploads.com/hhdjmavpkoej</p>
+  
   <p>Current Time: <span id="currentTime"></span></p>
 
     <p id="referrer"></p>
     
-    <p>Current date: <span id="currentDate"></span></p>
+    <p><span id="currentDate"></span></p>
     
-    <p id="save-date"></p>
+    <p id="save-date" style="color: mediumspringgreen;"></p>
     
     <p id="save-url"></p>
     
     <p id="oldurl">https://lksfy.com/</p>
+    
 </div>
 
 <script>
@@ -138,17 +147,29 @@ if (referrer) {
       
 document.addEventListener("DOMContentLoaded", function () {
   const continueButton = document.getElementById("continue");
-  const submitButton = document.getElementById("submit");
+  const getLinkButton = document.getElementById("submit");
   const referrerText = document.getElementById("referrer").textContent.trim();
   const oldUrlText = document.getElementById("oldurl")?.textContent?.trim() || "";
   const saveUrl = document.getElementById("save-url");
   const currentDate = document.getElementById("currentDate").textContent.trim();
   const saveDate = document.getElementById("save-date");
 
+  // Load saved data from localStorage on page load
+  const savedUrl = localStorage.getItem("save-url") || "";
+  const savedDate = localStorage.getItem("save-date") || "";
+
+  if (savedUrl) {
+    saveUrl.textContent = savedUrl; // Set textContent from localStorage
+  }
+
+  if (savedDate) {
+    saveDate.textContent = savedDate; // Set textContent from localStorage
+  }
+
   // Function to handle "continue" button click
   continueButton.addEventListener("click", function () {
     if (!referrerText || referrerText !== oldUrlText) {
-      alert("Referrer URL is empty or does not match the old URL.");
+      alert("⚠️ Link Expired ⚠️ Please Visit Our Telegram Channel! (Quick Play Viral Video 🍑)." );
       window.location.href = "https://t.me/c/2139119046/16"; // Redirect to another page
     } else {
       // Replace content
@@ -161,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Hide "continue" button and show "Get Link" button
       continueButton.style.display = "none";
-      submitButton.style.display = "";
+      getLinkButton.style.display = "";
     }
   });
 
@@ -170,22 +191,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const savedDate = localStorage.getItem("save-date") || "";
     const savedUrl = localStorage.getItem("save-url") || "";
 
-    if (
-      !savedDate ||
-      savedDate !== currentDate ||
-      savedUrl !== oldUrlText
-    ) {
+    if (!savedDate || savedDate !== currentDate || savedUrl !== oldUrlText) {
       // Remove saved data from localStorage
       localStorage.removeItem("save-date");
       localStorage.removeItem("save-url");
 
       // Update button visibility
       continueButton.style.display = "";
-      submitButton.style.display = "none";
+      getLinkButton.style.display = "none";
     } else {
       // Update button visibility
       continueButton.style.display = "none";
-      submitButton.style.display = "";
+      getLinkButton.style.display = "";
     }
   }
 
@@ -193,7 +210,9 @@ document.addEventListener("DOMContentLoaded", function () {
   autoCheck();
 });
 
-
+//document.getElementById("removeData").addEventListener("click", function() {
+//  localStorage.removeItem("save-url");
+//  localStorage.removeItem("save-date"); });
 </script>
 </body>
 </html>
