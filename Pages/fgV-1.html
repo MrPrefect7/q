@@ -55,10 +55,9 @@
  
 <!--- <button type="submit" id="Getlink">GetLink</button> -->
 
-  <button type="submit" id="submit" target="_blank">I am Not A Robot</button>
+  <button type="submit" id="submit">I am Not A Robot</button>
   
-<button id="removeData">Remove Saved Data</button>
-  
+<!-- <button id="removeData">Remove Saved Data</button> -->
 <div>
 
   <p id="SV1-link">https://streamtape.com/e/lajMQOo66Zu7gBm/</p>
@@ -71,11 +70,11 @@
   <p id="p2">https://devuploads.com/hhdjmavpkoej</p>
   <p id="p3">https://devuploads.com/hhdjmavpkoej</p>
   
-  <p>Current Time: <span id="currentTime"></span></p>
+  <p><span id="currentTime"></span></p>
 
-    <p id="referrer"></p>
+    <p id="referrer" style="color: yellow;"></p>
     
-    <p><span id="currentDate"></span></p>
+    <p><span id="currentDate" style="color: cyan;">2/1/2025</span></p>
     
     <p id="save-date" style="color: mediumspringgreen;"></p>
     
@@ -86,22 +85,22 @@
 </div>
 
 <script>
-  function updateCurrentTime() {
-  const currentTimeElement = document.getElementById('currentTime');
-  const now = new Date();
-  currentTimeElement.textContent = now.toLocaleTimeString(); // Updates the time every second
+    // Function to update the current time every second
+  function updateActualTime() {
+    const actualTimeElement = document.getElementById('currentTime');
+    const now = new Date();
+    actualTimeElement.textContent = now.toLocaleString(); // Updates with full date and time
 
-  // Update time every second
-  setTimeout(updateCurrentTime, 1000);
-}
+    setTimeout(updateActualTime, 1000);
+  }
 
-updateCurrentTime(); // Initial call to start the clock
+  updateActualTime(); // Initial call to start the clock
 
 // When the submit button is clicked
 document.getElementById("submit").addEventListener("click", function() {
-  // Save the current time to localStorage
+  // Save the current date and time to localStorage
   const now = new Date();
-  const timeToSave = now.toLocaleTimeString(); // Current time
+  const timeToSave = now.toISOString(); // Save ISO format
   localStorage.setItem("savedTime", timeToSave);
 
   // Save the values from p tags to localStorage
@@ -111,9 +110,9 @@ document.getElementById("submit").addEventListener("click", function() {
   localStorage.setItem("p3", document.getElementById("p3").textContent);
   localStorage.setItem("SV1-link", document.getElementById("SV1-link").textContent);
   localStorage.setItem("SV2-link", document.getElementById("SV2-link").textContent);
+  
   // Redirect to index.html
-  window.open("../", "_blank");
-    
+  window.location.href = "../";
 });
 
 
@@ -131,19 +130,16 @@ if (referrer) {
 }
 
       // Wait until the DOM is fully loaded
-      document.addEventListener('DOMContentLoaded', () => {
-        // Get the current date
-        const currentDate = new Date();
+   document.addEventListener('DOMContentLoaded', () => {
+  // Get the current date
+  const currentDate = new Date();
 
-        // Format the date as 'MM/DD/YYYY'
-        const formattedDate = currentDate.toLocaleDateString();
+  // Format the date as 'MM/DD/YYYY'
+  const formattedDate = currentDate.toLocaleDateString();
 
-        // Display the date in the <span> with ID 'currentDate'
-        document.getElementById('currentDate').textContent = formattedDate;
-      });
-      
-      
-      
+  // Display the date in the <span> with ID 'currentDate'
+  document.getElementById('currentDate').textContent = formattedDate;
+});
       
       
 document.addEventListener("DOMContentLoaded", function () {
@@ -170,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to handle "continue" button click
   continueButton.addEventListener("click", function () {
     if (!referrerText || referrerText !== oldUrlText) {
-      alert("⚠️ Link Expired ⚠️ Please Visit Our Telegram Channel! (Quick Play Viral Video 🍑)." );
+      alert("⚠️ Link Expired ⚠️ Please Visit Our Telegram Channel! (Quick Play Viral Video 🍑).");
       window.location.href = "https://t.me/c/2139119046/16"; // Redirect to another page
     } else {
       // Replace content
@@ -183,37 +179,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Hide "continue" button and show "Get Link" button
       continueButton.style.display = "none";
-      getLinkButton.style.display = "";
+      getLinkButton.style.display = "inline-block"; // Show "Get Link" button
     }
   });
+
 
   // Automatic check
   function autoCheck() {
     const savedDate = localStorage.getItem("save-date") || "";
     const savedUrl = localStorage.getItem("save-url") || "";
 
-    if (!savedDate || savedDate !== currentDate || savedUrl !== oldUrlText) {
-      // Remove saved data from localStorage
-      localStorage.removeItem("save-date");
-      localStorage.removeItem("save-url");
+    // Initially hide both buttons
+    continueButton.style.display = "none";
+    getLinkButton.style.display = "none";
 
-      // Update button visibility
-      continueButton.style.display = "";
-      getLinkButton.style.display = "none";
+    // Check if referrer matches the old URL
+    if (referrerText === oldUrlText) {
+      if (savedDate === currentDate) {
+        // If both referrer and saved date match
+        continueButton.style.display = "none"; // Hide "Continue" button
+        getLinkButton.style.display = "inline-block"; // Show "Get Link" button
+      } else {
+        // If saved date doesn't match
+        continueButton.style.display = "inline-block"; // Show "Continue"
+        getLinkButton.style.display = "none"; // Hide "Get Link" button
+        clearLocalStorageData(); // Clear localStorage data
+      }
     } else {
-      // Update button visibility
-      continueButton.style.display = "none";
-      getLinkButton.style.display = "";
+      // If referrer doesn't match
+      continueButton.style.display = "inline-block"; // Show "Continue"
+      getLinkButton.style.display = "none"; // Hide "Get Link" button
+      clearLocalStorageData(); // Clear localStorage data
     }
+  }
+
+  // Function to clear localStorage data
+  function clearLocalStorageData() {
+    localStorage.removeItem("save-url");
+    localStorage.removeItem("save-date");
   }
 
   // Run the auto-check
   autoCheck();
-});
-
-document.getElementById("removeData").addEventListener("click", function() {
-  localStorage.removeItem("save-url");
-  localStorage.removeItem("save-date"); });
+  });
+//  document.getElementById("removeData").addEventListener("click", function() {
+//    localStorage.removeItem("save-url");
+//    localStorage.removeItem("save-date");
+//  });
 </script>
 </body>
 </html>
