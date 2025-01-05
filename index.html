@@ -8,7 +8,7 @@
 </head>
 <body>
   <header id="logo">
-    <a href="#" rel="noreferrer">Quick Play</a>
+    <a href="https://linktr.ee/quickplay.in" rel="noreferrer">Quick Play</a>
   </header>
   
   <div class="Data">
@@ -25,7 +25,7 @@
   </div>
   <div id="body">
     <div id="title">
-      <p>Video Title</p>
+      <a href="https://linktr.ee/quickplay.in">Click Here For More Viral Videos</a>
     </div>
     
     <div id="videoplayer">
@@ -33,7 +33,7 @@
         
       <iframe 
         id="iframe"
-        src="" 
+        src="https://streamtape.com/e/lajMQOo66Zu7gBm/" 
         frameborder="0" 
         scrolling="no" 
         allowfullscreen>
@@ -51,58 +51,48 @@
     <div id="downloadbuttons">
       <p>Download Video</p>
       <span id="downloadbt">
-        <a href="" rel="noreferrer" id="btn1" target="_blank">1080p Full HD</a>
-        <a href="" rel="noreferrer" id="btn2" target="_blank">720p HD+</a>
-        <a href="" rel="noreferrer" id="btn3" target="_blank">480p SD+</a>
+        <a href="" rel="noreferrer" id="btn1">1080p Full HD</a>
+        <a href="" rel="noreferrer" id="btn2">720p HD+</a>
+        <a href="" rel="noreferrer" id="btn3">480p SD+</a>
       </span>
     </div>
   </div>
   <footer>
-    <p>Powered By <a href="#">Quick Pay</a> & <a href="#">Tech Point</a></p>
+    <p>Powered By <a href="https://linktr.ee/quickplay.in">Quick Pay</a> & <a href="https://linktr.ee/teachpoint.in">Tech Point</a></p>
   </footer>
 
+
 <script>
-      // Function to update the current time every second
+    // Function to update the current time every second
     function updateActualTime() {
       const actualTimeElement = document.getElementById('actualTime');
       const now = new Date();
-      actualTimeElement.textContent = now.toLocaleTimeString(); // Updates the time every second
+      actualTimeElement.textContent = now.toLocaleString(); // Updates with full date and time
 
       setTimeout(updateActualTime, 1000);
     }
 
     updateActualTime(); // Initial call to start the clock
 
+    // Check saved time and clear data if expired
     function checkSavedTime() {
       const savedTime = localStorage.getItem("savedTime");
       if (savedTime) {
         const savedTimeElement = document.getElementById("savedTime");
         savedTimeElement.textContent = savedTime;
 
-        // Compare saved time with actual time
-        const savedTimeDate = new Date();
+        // Convert savedTime to Date object
+        const savedTimeDate = new Date(savedTime);
         const currentTimeDate = new Date();
 
-        // Assuming saved time in 'HH:MM:SS' format
-        const [savedHours, savedMinutes, savedSeconds] = savedTime.split(':').map(Number);
-        savedTimeDate.setHours(savedHours, savedMinutes, savedSeconds);
+        // Calculate the difference in minutes
+        const timeDifference = (currentTimeDate - savedTimeDate) / (1000 * 60);
 
-        // Calculate the difference in minutes (1 minute instead of 60)
-        const timeDifference = (currentTimeDate - savedTimeDate) / (1000 * 60); // Difference in minutes
-
-        // If more than 60 minute, clear localStorage
+        // If more than 60 minutes, clear localStorage
         if (timeDifference >= 60) {
-          localStorage.removeItem("savedTime");
-          localStorage.removeItem("pv");
-          localStorage.removeItem("p1");
-          localStorage.removeItem("p2");
-          localStorage.removeItem("p3");
-          
-          localStorage.removeItem("SV1-link");
-          localStorage.removeItem("SV2-link");
-          
-          alert("Link Expire, To Restore Again Visit Quick Play Telegram Channel");
-          window.location.reload(); // Reload the page to reflect the changes
+          localStorage.clear();
+          alert("Link Expired, To Restore Again Visit Quick Play Telegram Channel");
+          window.location.reload();
         } else {
           // Update the iframe and buttons with the saved values
           document.querySelector("iframe").src = localStorage.getItem("pv");
@@ -112,7 +102,6 @@
          
           document.getElementById("server1-link").textContent = localStorage.getItem("SV1-link");
           document.getElementById("server2-link").textContent = localStorage.getItem("SV2-link");
-
         }
       }
     }
@@ -121,37 +110,36 @@
 
     // Event listener for the destroy button to clear the data manually
     document.getElementById("destroy").addEventListener("click", function() {
-      localStorage.removeItem("savedTime");
-      localStorage.removeItem("pv");
-      localStorage.removeItem("p1");
-      localStorage.removeItem("p2");
-      localStorage.removeItem("p3");
-      
-      localStorage.removeItem("SV1-link");
-      localStorage.removeItem("SV2-link");
-
-      alert("! You Remove Your Data !");
+      localStorage.clear();
+      alert("! You Removed Your Data !");
       window.location.reload(); // Reload the page to reflect the changes
     });
-    
-    
+
     // Function to update the iframe src
-function updateIframeSrc(serverId, linkId) {
-  const serverElement = document.getElementById(serverId);
-  const linkElement = document.getElementById(linkId);
+    function updateIframeSrc(serverId, linkId) {
+      const serverElement = document.getElementById(serverId);
+      const linkElement = document.getElementById(linkId);
 
-  serverElement.addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent the default action of the anchor tag
-    const iframe = document.getElementById("iframe");
-    const newSrc = linkElement.textContent; // Get the text from the span
-    iframe.src = newSrc; // Update the iframe src
-  });
-}
+      serverElement.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default action of the anchor tag
+        const iframe = document.getElementById("iframe");
+        const newSrc = linkElement.textContent; // Get the text from the span
+        iframe.src = newSrc; // Update the iframe src
+      });
+    }
 
-// Call the function for both servers
-updateIframeSrc("server1", "server1-link");
-updateIframeSrc("server2", "server2-link");
+    // Call the function for both servers
+    updateIframeSrc("server1", "server1-link");
+    updateIframeSrc("server2", "server2-link");
 
+    // Save the current time to localStorage for testing
+    function saveTimeToLocalStorage() {
+      const now = new Date();
+      localStorage.setItem("savedTime", now.toISOString()); // Save ISO format
+    }
+
+    // Call this function manually or during a specific event
+    saveTimeToLocalStorage();
 </script>
 </body>
 </html>
