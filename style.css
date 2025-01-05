@@ -33,7 +33,7 @@ body{
 
 .Data p{
   color: red;
-  opacity: 0;
+  opacity: 0; 
 }
 #body{
   width: 100vw;
@@ -67,7 +67,11 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
+  font-size: 2rem;
+}
+#title a{
+  text-decoration: none;
+  color: cyan;
 }
 #videoplayer{
   width: 100vw;
