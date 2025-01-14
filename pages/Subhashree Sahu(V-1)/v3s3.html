@@ -1,1 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Page</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html{
+      font-size: 62%;
+    }
+    body{
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    body #submit{
+      width: 70vw;
+      height: 5vh;
+      background: greenyellow;
+      border: none;
+      border-radius: 50px;
+      font-family: sans-serif;
+      font-size: 3rem;
+      font-weight: bold;
+      display: ;
+    }
+    #continue{
+      width: 70vw;
+      height: 5vh;
+      background: greenyellow;
+      border: none;
+      border-radius: 50px;
+      font-family: sans-serif;
+      font-size: 3rem;
+      font-weight: bold;
+    }
 
+    body div p{
+      color: red;
+    opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+ <button type="submit" id="continue">Continue</button>
+ 
+<!--- <button type="submit" id="Getlink">GetLink</button> -->
+
+  <button type="submit" id="submit">I am Not A Robot</button>
+  
+<!-- <button id="removeData">Remove Saved Data</button> -->
+<div>
+
+  <p id="SV1-link">https://streamtape.com/v/MjqODvYa6OHmPkA/</p>
+  
+  <p id="SV2-link">https://short.ink/sTQBSHesX</p>
+  
+  <p id="pv">https://streamtape.com/v/MjqODvYa6OHmPkA/</p>
+  
+  <p id="p1">https://telegram.me/quickplayxbot?text=/V1dd</p>
+  <p id="p2">https://telegram.me/quickplayxbot?text=/V1dd</p>
+  <p id="p3">https://telegram.me/quickplayxbot?text=/V1dd</p>
+  
+  <p><span id="currentTime"></span></p>
+
+    <p id="referrer" style="color: yellow;"></p>
+    
+    <p><span id="currentDate" style="color: cyan;">2/1/2025</span></p>
+    
+    <p id="save-date" style="color: mediumspringgreen;"></p>
+    
+    <p id="save-url"></p>
+    
+    <p id="oldurl">https://lksfy.com/</p>
+    
+</div>
+
+<script>
+    // Function to update the current time every second
+  function updateActualTime() {
+    const actualTimeElement = document.getElementById('currentTime');
+    const now = new Date();
+    actualTimeElement.textContent = now.toLocaleString(); // Updates with full date and time
+
+    setTimeout(updateActualTime, 1000);
+  }
+
+  updateActualTime(); // Initial call to start the clock
+
+// When the submit button is clicked
+document.getElementById("submit").addEventListener("click", function() {
+  // Save the current date and time to localStorage
+  const now = new Date();
+  const timeToSave = now.toISOString(); // Save ISO format
+  localStorage.setItem("savedTime", timeToSave);
+
+  // Save the values from p tags to localStorage
+  localStorage.setItem("pv", document.getElementById("pv").textContent);
+  localStorage.setItem("p1", document.getElementById("p1").textContent);
+  localStorage.setItem("p2", document.getElementById("p2").textContent);
+  localStorage.setItem("p3", document.getElementById("p3").textContent);
+  localStorage.setItem("SV1-link", document.getElementById("SV1-link").textContent);
+  localStorage.setItem("SV2-link", document.getElementById("SV2-link").textContent);
+  
+  // Redirect to index.html
+  window.location.href = "../../";
+});
+
+
+// Get the referrer URL
+const referrer = document.referrer;
+
+// Select the paragraph tag
+const referrerElement = document.getElementById('referrer');
+
+// Display the referrer URL or a fallback message
+if (referrer) {
+  referrerElement.textContent = `${referrer}`;
+} else {
+  referrerElement.textContent = "";
+}
+
+      // Wait until the DOM is fully loaded
+   document.addEventListener('DOMContentLoaded', () => {
+  // Get the current date
+  const currentDate = new Date();
+
+  // Format the date as 'MM/DD/YYYY'
+  const formattedDate = currentDate.toLocaleDateString();
+
+  // Display the date in the <span> with ID 'currentDate'
+  document.getElementById('currentDate').textContent = formattedDate;
+});
+      
+      
+document.addEventListener("DOMContentLoaded", function () {
+  const continueButton = document.getElementById("continue");
+  const getLinkButton = document.getElementById("submit");
+  const referrerText = document.getElementById("referrer").textContent.trim();
+  const oldUrlText = document.getElementById("oldurl")?.textContent?.trim() || "";
+  const saveUrl = document.getElementById("save-url");
+  const currentDate = document.getElementById("currentDate").textContent.trim();
+  const saveDate = document.getElementById("save-date");
+
+  // Load saved data from localStorage on page load
+  const savedUrl = localStorage.getItem("save-url") || "";
+  const savedDate = localStorage.getItem("save-date") || "";
+
+  if (savedUrl) {
+    saveUrl.textContent = savedUrl; // Set textContent from localStorage
+  }
+
+  if (savedDate) {
+    saveDate.textContent = savedDate; // Set textContent from localStorage
+  }
+
+  // Function to handle "continue" button click
+  continueButton.addEventListener("click", function () {
+    if (!referrerText || referrerText !== oldUrlText) {
+      alert("⚠️ Link Expired ⚠️ Please Visit Our Telegram Channel! (Quick Play Viral Video 🍑).");
+      window.location.href = "https://t.me/c/2139119046/16"; // Redirect to another page
+    } else {
+      // Replace content
+      saveUrl.textContent = referrerText;
+      saveDate.textContent = currentDate;
+
+      // Save to localStorage
+      localStorage.setItem("save-url", referrerText);
+      localStorage.setItem("save-date", currentDate);
+
+      // Hide "continue" button and show "Get Link" button
+      continueButton.style.display = "none";
+      getLinkButton.style.display = "inline-block"; // Show "Get Link" button
+    }
+  });
+
+
+  // Automatic check
+  function autoCheck() {
+    const savedDate = localStorage.getItem("save-date") || "";
+    const savedUrl = localStorage.getItem("save-url") || "";
+
+    // Initially hide both buttons
+    continueButton.style.display = "none";
+    getLinkButton.style.display = "none";
+
+    // Check if referrer matches the old URL
+    if (referrerText === oldUrlText) {
+      if (savedDate === currentDate) {
+        // If both referrer and saved date match
+        continueButton.style.display = "none"; // Hide "Continue" button
+        getLinkButton.style.display = "inline-block"; // Show "Get Link" button
+      } else {
+        // If saved date doesn't match
+        continueButton.style.display = "inline-block"; // Show "Continue"
+        getLinkButton.style.display = "none"; // Hide "Get Link" button
+        clearLocalStorageData(); // Clear localStorage data
+      }
+    } else {
+      // If referrer doesn't match
+      continueButton.style.display = "inline-block"; // Show "Continue"
+      getLinkButton.style.display = "none"; // Hide "Get Link" button
+      clearLocalStorageData(); // Clear localStorage data
+    }
+  }
+
+  // Function to clear localStorage data
+  function clearLocalStorageData() {
+    localStorage.removeItem("save-url");
+    localStorage.removeItem("save-date");
+  }
+
+  // Run the auto-check
+  autoCheck();
+  });
+//  document.getElementById("removeData").addEventListener("click", function() {
+//    localStorage.removeItem("save-url");
+//    localStorage.removeItem("save-date");
+//  });
+</script>
+</body>
+</html>
