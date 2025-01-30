@@ -1,1 +1,128 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", serif;
+}
+html{
+  font-size: 70%;
+}
+#allcontent{
+  width: 100vw;
+  height: 100vh;
+  background: #3b4465;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  user-select: none;
+}
+header{
+  width: 100vw;
+  height: 7vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+header h6{
+  font-size: 2rem;
+color: #fff;
+}
+#telegram{
+  font-size: 3rem;
+  color: #fff;
+  text-decoration: none;
+}
+#insta{
+  font-size: 3rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+#destroy{
+  width: 100vw;
+  height: 10vh;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.if-border{
+  width: 90vw;
+  height: 33vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: white;
+  border-radius: 5px;
+}
+.if-border iframe{
+  width: 90%;
+  height: 25vh;
+  text-overflow: hidden;
+  overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.1);
+}
+.if-border span{
+  width: 90vw;
+  height: 6vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.if-border span a{
+  width: 30vw;
+  height: 4vh;
+  background: #8BE22B;
+  border-radius: 5px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: #000;
+  font-weight: 500;
+}
+
+#buttons{
+  width: 90%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 5%;
+}
+#buttons a{
+  width: 60vw;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #8BE22B;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+footer{
+  width: 100vw;
+  height: 7vh;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
+  font-weight: 400;
+}
+footer p a{
+  text-decoration: none;
+  color: #8BE22B;
+  font-weight: 600;
+  }
