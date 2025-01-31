@@ -82,6 +82,6 @@ document.addEventListener("DOMContentLoaded", function() {
     localStorage.setItem("text3", document.getElementById("text3").textContent);
 
     // Redirect to index.html
-    window.location.href = "/index.html";
+    window.location.href = "/q/index.html";
   });
 });
