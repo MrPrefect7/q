@@ -115,6 +115,15 @@ html{
   border-radius: 10px;
 }
 #gtbutton{
+  width: 40vw;
+height: 3vh;
+font-size: 3rem;
+text-decoration: none;
+color: #000;
+font-weight: 600;
+justify-content: center;
+align-items: center;
+border-radius: 10px;
   background: #8BE22B;
   display: none;
   transition: all 0.3s linear;
