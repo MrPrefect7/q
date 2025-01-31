@@ -32,7 +32,6 @@
 });
 
     
-   
     
 document.getElementById('proceed').addEventListener('click', () => {
     // Get the token entered by the user
